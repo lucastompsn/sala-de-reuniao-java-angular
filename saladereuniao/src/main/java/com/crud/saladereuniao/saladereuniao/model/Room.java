@@ -2,81 +2,48 @@ package com.crud.saladereuniao.saladereuniao.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name="meetingroom")
+@Table(name = "meetingroom")
+@Getter // Lombok gera todos os getters automaticamente
+@Setter // Lombok gera todos os setters automaticamente
 public class Room {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Setter
+    @Column(name = "name", nullable = false)
     private String name;
+
+    @Column(name = "date", nullable = false)
     private String date;
 
-    public Room() {
+    @Column(name = "startHour", nullable = false)
+    private String startHour;
 
-    }
+    @Column(name = "endHour", nullable = false)
+    private String endHour;
 
-    public Room(long id, String name, String date, String startHour, String endHour) {
-        this.id = id;
+    // Construtor sem parâmetros (necessário para JPA)
+    public Room() {}
+
+    // Construtor com parâmetros (se necessário em algum ponto)
+    public Room(String name, String date, String startHour, String endHour) {
         this.name = name;
         this.date = date;
         this.startHour = startHour;
         this.endHour = endHour;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    public long getId() {
-        return id;
-    }
-
-    @Column(name = "name", nullable = false)
-    public String getName() {
-        return name;
-    }
-
-    @Column(name = "date", nullable = false)
-    public String getDate() {
-        return date;
-    }
-
-    @Column(name = "starHour", nullable = false)
-    public String getStartHour() {
-        return startHour;
-    }
-
-    @Column(name = "endHour", nullable = false)
-    public String getEndHour() {
-        return endHour;
-    }
-
     @Override
     public String toString() {
-        return "Room [id" + id + ",name=" + name + ",startHour=" + startHour + ",endHour=" + endHour + "]";
-    }
-
-    @Setter
-    private String startHour;
-    private String endHour;
-
-    public void setDate(String date) {
-    }
-
-    public void setEndHour(String endHour) {
-    }
-
-    public void setName(String name) {
-    }
-
-    public void setStartHour(String startHour) {
+        return "Room [id=" + id + ", name=" + name + ", startHour=" + startHour + ", endHour=" + endHour + "]";
     }
 }
